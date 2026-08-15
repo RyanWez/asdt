@@ -1,0 +1,236 @@
+@import "tailwindcss";
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+@theme {
+  /* Color — refined full palette (no pure white / black) */
+  --color-ivory: oklch(97% 0.012 75);
+  --color-ivory-deep: oklch(94% 0.016 76);
+  --color-cream: oklch(95.5% 0.02 68);
+
+  --color-raspberry: oklch(58% 0.14 8);
+  --color-raspberry-deep: oklch(48% 0.15 10);
+  --color-raspberry-soft: oklch(74% 0.1 8);
+
+  --color-lilac: oklch(83% 0.055 305);
+  --color-lilac-deep: oklch(64% 0.078 305);
+
+  --color-sage: oklch(79% 0.055 145);
+  --color-sage-deep: oklch(60% 0.075 145);
+
+  --color-apricot: oklch(85% 0.08 60);
+  --color-apricot-deep: oklch(72% 0.1 55);
+
+  --color-ink: oklch(25% 0.025 340);
+  --color-muted: oklch(50% 0.025 340);
+  --color-line: oklch(89% 0.025 350);
+
+  /* Typography */
+  --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Cormorant Garamond", ui-serif, Georgia, "Times New Roman", serif;
+  --font-hand: "Caveat", "Segoe Print", cursive;
+  --font-burmese: "Noto Sans Myanmar", "Manrope", sans-serif;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+
+  /* Numeric font-weight utilities (font-500 / font-600 / font-700) */
+  --font-weight-500: 500;
+  --font-weight-600: 600;
+  --font-weight-700: 700;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: auto;
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  #root {
+    overflow-x: clip;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  p { color: var(--color-ink); }
+
+  ::selection {
+    background: var(--color-lilac);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-raspberry);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  img { display: block; max-width: 100%; }
+
+  /* Hide native cursor only where the custom cursor is active (fine pointer) */
+  @media (pointer: fine) {
+    body.custom-cursor,
+    body.custom-cursor a,
+    body.custom-cursor button,
+    body.custom-cursor [data-cursor] {
+      cursor: none;
+    }
+    body.custom-cursor input,
+    body.custom-cursor textarea,
+    body.custom-cursor select {
+      cursor: auto;
+    }
+  }
+
+  /* Lenis smooth scroll */
+  html.lenis,
+  html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+  .lenis.lenis-stopped { overflow: clip; }
+}
+
+/* ============================================================
+   COMPONENTS
+   ============================================================ */
+@layer components {
+  /* Editorial display scale — max five primary sizes */
+  .display-hero {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(3rem, 9vw, 6.5rem);
+    line-height: 0.96;
+    letter-spacing: -0.022em;
+  }
+  .display-1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.5rem, 6vw, 4.75rem);
+    line-height: 1.0;
+    letter-spacing: -0.018em;
+  }
+  .display-2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2rem, 4.4vw, 3.25rem);
+    line-height: 1.06;
+    letter-spacing: -0.012em;
+  }
+  .display-3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+    line-height: 1.2;
+  }
+
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--color-raspberry-deep);
+  }
+
+  .measure { max-width: 64ch; }
+
+  .hand { font-family: var(--font-hand); }
+  .burmese { font-family: var(--font-burmese); }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.015em;
+    padding: 0.95rem 1.9rem;
+    border-radius: 999px;
+    transition: background-color 0.25s var(--ease-soft),
+      color 0.25s var(--ease-soft), border-color 0.25s var(--ease-soft);
+    min-height: 48px;
+  }
+  .btn-primary { background: var(--color-raspberry); color: var(--color-ivory); }
+  .btn-primary:hover { background: var(--color-raspberry-deep); }
+  .btn-outline { background: transparent; color: var(--color-ink); border: 1px solid var(--color-line); }
+  .btn-outline:hover { border-color: var(--color-raspberry); color: var(--color-raspberry); }
+
+  /* Animated link underline */
+  .link-underline { position: relative; }
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s var(--ease-out-expo);
+  }
+  .link-underline:hover::after,
+  .link-underline[data-active="true"]::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Subtle textile grain overlay */
+  .grain-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* Respect reduced motion across CSS-driven animation */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

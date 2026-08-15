@@ -21,7 +21,7 @@ export function Navbar() {
 
   // Active-section highlighting
   useEffect(() => {
-    const ids = nav.map((n) => n.id).filter((id) => id !== "top");
+    const ids = nav.map((n) => n.id);
     const sections = ids
       .map((id) => document.getElementById(id))
       .filter(Boolean) as HTMLElement[];

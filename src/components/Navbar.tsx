@@ -75,13 +75,13 @@ export function Navbar() {
 
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-[80] transition-all duration-500",
+          "fixed left-1/2 top-4 z-[80] w-[calc(100%-2rem)] max-w-[1400px] -translate-x-1/2 rounded-full transition-all duration-500",
           scrolled
-            ? "border-b border-line/80 bg-ivory/80 backdrop-blur-md"
-            : "border-b border-transparent bg-transparent"
+            ? "border border-line/80 bg-ivory/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-md"
+            : "border border-transparent bg-transparent"
         )}
       >
-        <nav className="mx-auto flex max-w-[1400px] items-center justify-between px-5 py-4 sm:px-8 md:py-5">
+        <nav className="flex items-center justify-between px-5 py-3 sm:px-8">
           {/* Wordmark */}
           <a
             href="#top"

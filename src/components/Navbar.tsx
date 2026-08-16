@@ -127,17 +127,23 @@ export function Navbar() {
               aria-expanded={open}
               className="flex h-11 w-11 items-center justify-center rounded-full border border-line text-ink lg:hidden"
             >
-              <span className="relative block h-3 w-5">
+              <span className="relative flex flex-col justify-between w-5 h-3.5 overflow-hidden">
                 <span
                   className={cn(
-                    "absolute left-0 top-0 h-px w-5 bg-ink transition-all duration-300",
-                    open && "top-1.5 rotate-45"
+                    "absolute left-0 h-[1.5px] w-full bg-ink transition-all duration-300 origin-center",
+                    open ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0"
                   )}
                 />
                 <span
                   className={cn(
-                    "absolute bottom-0 left-0 h-px w-5 bg-ink transition-all duration-300",
-                    open && "bottom-1.5 -rotate-45"
+                    "absolute left-0 top-1/2 h-[1.5px] w-full -translate-y-1/2 bg-ink transition-all duration-300",
+                    open ? "opacity-0 translate-x-4" : "opacity-100"
+                  )}
+                />
+                <span
+                  className={cn(
+                    "absolute left-0 h-[1.5px] w-full bg-ink transition-all duration-300 origin-center",
+                    open ? "top-1/2 -translate-y-1/2 -rotate-45" : "bottom-0"
                   )}
                 />
               </span>
